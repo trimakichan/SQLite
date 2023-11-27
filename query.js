@@ -12,9 +12,9 @@ const db = new sqlite3.Database(dbPath);
 // const query = "SELECT * FROM entries WHERE id = ?";
 
 // Query to retrieve rows where the "fruit" column contains the specified substring
-const query = 'SELECT * FROM Kanji WHERE text LIKE ?';
+const query = 'SELECT * FROM Sense WHERE gloss LIKE ?';
 
-const searchString = "る";
+const searchString = "before";
 
 db.all(query, [`%${searchString}%`], (err, rows) => {
   if (err) {
