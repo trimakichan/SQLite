@@ -143,44 +143,6 @@ db.serialize(() => {
                 }
             );
         })
-
-        // entry.sense.forEach((sense) => {
-        //   db.run(
-        //     `INSERT INTO Sense (entry_id, part_of_speech, related, antonym, field, dialect, misc, info, languageSource) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        //     [
-        //       entry.id,
-        //       sense.part_of_speech,
-        //       sense.related,
-        //       sense.antonym,
-        //       sense.field,
-        //       sense.dialect,
-        //       sense.misc,
-        //       sense.info,
-        //       sense.languageSource,
-        //     ],
-        //     (err) => {
-        //       if (err) {
-        //         console.error("Error inserting data:", err.message);
-        //       } else {
-        //         console.log(`Data inserted for ID ${entry.id}`);
-        //       }
-        //     }
-        //   );
-
-        //   sense.gloss.forEach((gloss) => {
-        //     db.run(
-        //       `INSERT INTO Gloss (id, sense_id, lang, text) VALUES (?, ?, ?, ?)`,
-        //       [entry.id, sense.id, gloss.lang, gloss.text],
-        //       (err) => {
-        //         if (err) {
-        //           console.error("Error inserting data:", err.message);
-        //         } else {
-        //           console.log(`Data inserted for ID ${entry.id}`);
-        //         }
-        //       }
-        //     );
-        //   });
-        // });
     });
 });
 
