@@ -14,7 +14,7 @@ const db = new sqlite3.Database(dbPath);
 // Query to retrieve rows where the "fruit" column contains the specified substring
 const query = 'SELECT * FROM Sense WHERE gloss LIKE ?';
 
-const searchString = "before";
+const searchString = "after";
 
 db.all(query, [`%${searchString}%`], (err, rows) => {
   if (err) {

@@ -40,6 +40,16 @@ db.serialize(() => {
         id TEXT PRIMARY KEY,
         entry_id TEXT,
         gloss TEXT,
+        partOfSpeech TEXT,
+        appliesToKanji TEXT,
+        appliesToKana TEXT,
+        related TEXT,
+        antonym TEXT,
+        field TEXT,
+        dialect TEXT,
+        misc TEXT,
+        info TEXT,
+        languageSource TEXT,
         FOREIGN KEY (entry_id) REFERENCES Words(id)
     )`);
 
@@ -104,12 +114,21 @@ db.serialize(() => {
 
         entry.sense.forEach((sense, senseIndex) => {
             const sense_id = `${entry.id}_sense_${senseIndex}`;
-            // may have bug parsing back into an array in the app if gloss.text contains a comma in it
-            const gloss = sense.gloss.map(glossObj => glossObj.text).join("$ ")
+            const gloss = sense.gloss.map(obj => obj.text).join("$ ")
+            const partOfSpeech = sense.partOfSpeech.join("$ ")
+            const appliesToKanji = sense.appliesToKanji.join("$ ")
+            const appliesToKana = sense.appliesToKana.join("$ ")
+            const related = sense.related.join("$ ")
+            const antonym = sense.antonym.join("$ ")
+            const field = sense.field.join("$ ")
+            const dialect = sense.dialect.join("$ ")
+            const misc = sense.misc.join("$ ")
+            const info = sense.info.join("$ ")
+            const languageSource = sense.languageSource.join("$ ")
 
             db.run(
-                `INSERT INTO Sense (id, entry_id, gloss) VALUES (?, ?, ?)`,
-                [sense_id, entry.id, gloss],
+                `INSERT INTO Sense (id, entry_id, gloss, partOfSpeech, appliesToKanji, appliesToKana, related, antonym, field, dialect, misc, info, languageSource) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [sense_id, entry.id, gloss, partOfSpeech, appliesToKanji, appliesToKana, related, antonym, field, dialect, misc, info, languageSource],
                 (err) => {
                     if (err) {
                         console.error(
