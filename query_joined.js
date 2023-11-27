@@ -13,7 +13,13 @@ const db = new sqlite3.Database(dbPath);
 
 // Query to retrieve rows where the "fruit" column contains the specified substring
 
-const query = 'SELECT Sense.entry_id, Sense.gloss, Kana.text FROM Sense FULL OUTER JOIN Kana ON Sense.entry_id = Kana.entry_id WHERE gloss LIKE ?';
+const query = 
+`SELECT Sense.entry_id, Sense.gloss, Kana.text 
+FROM Sense 
+FULL OUTER JOIN Kana 
+ON Sense.entry_id = Kana.entry_id 
+WHERE gloss 
+LIKE ?`;
 
 const searchString = "book";
 
