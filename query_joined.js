@@ -13,10 +13,9 @@ const db = new sqlite3.Database(dbPath);
 
 // Query to retrieve rows where the "fruit" column contains the specified substring
 
-const query = 
-`SELECT Sense.entry_id, Sense.gloss, Kana.text 
+const query = `SELECT Sense.entry_id, Sense.gloss, Kana.text 
 FROM Sense 
-FULL OUTER JOIN Kana 
+INNER JOIN Kana 
 ON Sense.entry_id = Kana.entry_id 
 WHERE gloss 
 LIKE ?`;
@@ -28,26 +27,26 @@ db.all(query, [`%${searchString}%`], (err, rows) => {
     console.error("Error executing query:", err.message);
   } else {
     if (rows.length > 0) {
-      console.log("Results:", rows);
+      console.log("Results:", rows, `Number of results: ${rows.length}`);
     } else {
       console.log(
         `No entry found containing the substring "${searchString}" in the 'text' column`
       );
     }
   }
-// });
+  // });
 
-// Execute the query with the specified ID and handle the result
-// db.get(query, [targetId], (err, row) => {
-//   if (err) {
-//     console.error("Error executing query:", err.message);
-//   } else {
-//     if (row) {
-//       console.log("Result:", row);
-//     } else {
-//       console.log(`No entry found with ID ${targetId}`);
-//     }
-//   }
+  // Execute the query with the specified ID and handle the result
+  // db.get(query, [targetId], (err, row) => {
+  //   if (err) {
+  //     console.error("Error executing query:", err.message);
+  //   } else {
+  //     if (row) {
+  //       console.log("Result:", row);
+  //     } else {
+  //       console.log(`No entry found with ID ${targetId}`);
+  //     }
+  //   }
 
   // Close the database connection
   db.close((closeErr) => {
