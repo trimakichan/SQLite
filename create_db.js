@@ -4,7 +4,7 @@ const fs = require("fs");
 const uniq = require("lodash/uniq")
 
 // Path to your JSON file
-const jsonFilePath = "./jmdict-eng-common-3.5.0.json";
+const jsonFilePath = "./jmdict-eng-3.5.0.json";
 
 // Read JSON file
 const jsonData = JSON.parse(fs.readFileSync(jsonFilePath, "utf8"));
@@ -43,7 +43,7 @@ db.serialize(() => {
             allTags.push("common")
         }
 
-        const uniqueTags = uniq(tags).join("$ ")
+        const uniqueTags = uniq(allTags).join("$ ")
 
         db.run(`INSERT INTO Words (id, entry_data, kanjis, kanas, meanings, tags) VALUES (?, ?, ?, ?, ?, ?)`, [id, entry_data, kanjis, kanas, meanings, uniqueTags], (err) => {
             if (err) {
